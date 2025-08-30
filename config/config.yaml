@@ -1,0 +1,81 @@
+# Configuration file for Stock Fundamentals Analyzer
+
+# Screening Parameters
+screening:
+  small_cap_threshold: 2000000000  # $2B
+  micro_cap_threshold: 300000000   # $300M
+  min_volume: 100000              # Daily volume
+  min_price: 5.0                  # Minimum share price
+  max_price: 1000.0               # Maximum share price
+
+# Financial Metrics Thresholds
+metrics:
+  pe_ratio_max: 25
+  pe_ratio_min: 5
+  pb_ratio_max: 5
+  debt_equity_max: 1.0
+  roe_min: 0.08                   # 8%
+  profit_margin_min: 0.05         # 5%
+  revenue_growth_min: 0.0         # 0%
+  current_ratio_min: 1.0
+
+# Sector Classifications
+sectors:
+  healthcare_keywords: ['biotech', 'pharma', 'medical', 'health', 'drug', 'therapeutic']
+  tech_keywords: ['software', 'semiconductor', 'tech', 'digital', 'internet', 'cloud']
+  financial_keywords: ['bank', 'insurance', 'finance', 'credit', 'loan', 'mortgage']
+  industrial_keywords: ['manufacturing', 'aerospace', 'defense', 'transportation']
+  energy_keywords: ['oil', 'gas', 'renewable', 'energy', 'solar', 'wind']
+  consumer_discretionary_keywords: ['retail', 'restaurant', 'automotive', 'leisure']
+  consumer_staples_keywords: ['food', 'beverage', 'household', 'grocery']
+  materials_keywords: ['chemical', 'metal', 'mining', 'steel', 'aluminum']
+  utilities_keywords: ['electric', 'gas', 'water', 'utility']
+  communication_keywords: ['telecom', 'media', 'entertainment', 'broadcasting']
+
+# Data Sources
+data_sources:
+  primary: 'yfinance'
+  backup: 'alpha_vantage'
+  rate_limit_delay: 0.1           # Seconds between API calls
+  cache_duration: 3600            # Cache duration in seconds (1 hour)
+
+# Scoring Weights
+scoring_weights:
+  pe_ratio: -0.2                  # Lower is better
+  roe: 0.3                        # Higher is better
+  profit_margin: 0.25             # Higher is better
+  revenue_growth: 0.15            # Higher is better
+  debt_to_equity: -0.1            # Lower is better
+
+# Visualization Settings
+visualization:
+  default_theme: 'plotly_white'
+  color_palette: 'Set2'
+  figure_width: 800
+  figure_height: 600
+  export_dpi: 300
+
+# File Paths
+paths:
+  data_directory: 'data'
+  raw_data: 'data/raw'
+  processed_data: 'data/processed'
+  cache_directory: 'data/cache'
+  output_directory: 'output'
+  log_directory: 'logs'
+
+# Performance Settings
+performance:
+  max_concurrent_requests: 5
+  batch_size: 50
+  timeout_seconds: 30
+  retry_attempts: 3
+  cache_enabled: true
+
+# Alert Settings
+alerts:
+  email_enabled: false
+  email_smtp_server: 'smtp.gmail.com'
+  email_port: 587
+  undervalued_threshold: 0.8      # Alert when stock is 20% below fair value
+  overvalued_threshold: 1.2       # Alert when stock is 20% above fair value
