@@ -5,20 +5,27 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Any, Optional
 import os
+from typing import List, Dict, Any, Optional
 
 class FinancialVisualizer:
-    def __init__(self, style: str = 'seaborn'):
-        """
-        Initialize the FinancialVisualizer.
+    def __init__(self, style='default'):
+        """Initialize the visualizer with matplotlib and seaborn styling."""
+        # Use matplotlib style (not 'seaborn' which isn't valid)
+        if style == 'seaborn':
+            # Use a valid matplotlib style instead
+            plt.style.use('default')
+            # Set seaborn style properly
+            sns.set_style("whitegrid")
+            sns.set_palette("husl")
+        else:
+            plt.style.use(style)
         
-        Args:
-            style (str): Matplotlib style to use
-        """
-        plt.style.use(style)
-        sns.set_palette("husl")
-        self.fig_size = (12, 8)
+        # Set default plotly theme
+        self.plotly_theme = 'plotly_white'
+        
+        # Set default figure size
+        self.fig_size = (10, 6)
         
     def plot_sector_metrics(self, data: pd.DataFrame, sectors: List[str], metric: str) -> go.Figure:
         """
